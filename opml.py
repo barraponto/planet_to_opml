@@ -10,7 +10,11 @@ class OPML:
             self.title = title
             etree.SubElement(self.head, 'title').text = self.title
         for outline in outlines:
-            etree.SubElement(
-                    self.body, 'outline', text=outline['text'], type='rss',
-                    htmlUrl=outline['htmlUrl'], xmlUrl=outline['xmlUrl'])
+            self.add_rss(**outline)
+
+    def add_rss(self, **attributes):
+        outline = etree.SubElement(self.body, 'outline', type='rss')
+        for attribute in attributes:
+            value = attributes[attribute]
+            outline.set(attribute, value)
 
