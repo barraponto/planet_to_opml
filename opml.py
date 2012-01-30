@@ -18,3 +18,6 @@ class OPML:
             value = attributes[attribute]
             outline.set(attribute, value)
 
+    def write_file(self, path):
+        file = open(path, 'w')
+        file.write(etree.tostring(self.root, pretty_print=True, encoding='utf-8'))
